@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FORGE — Strength & Conditioning Gym</title>
+<meta name="description" content="FORGE is a concept strength & conditioning gym in Delhi — a fictional brand built as a web design portfolio project, featuring coached powerlifting, conditioning, and boxing programs.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="FORGE — Strength & Conditioning Gym">
+<meta property="og:description" content="A fictional strength & conditioning gym concept — iron floor, real coaching, no gimmicks. Built as a web design portfolio project.">
+<meta property="og:image" content="https://example.com/forge/og-image.jpg"><!-- placeholder: replace with a real 1200x630 OG image -->
+<meta property="og:url" content="https://example.com/forge"><!-- placeholder -->
+
+<!-- Canonical (placeholder — replace with real deployed URL) -->
+<link rel="canonical" href="https://example.com/forge">
+
+<!-- Favicon (inline placeholder mark, swap for a real icon file later) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23141414'/%3E%3Crect x='10' y='44' width='80' height='12' fill='%23c1440e'/%3E%3Crect x='4' y='34' width='10' height='32' fill='%23ede8df'/%3E%3Crect x='86' y='34' width='10' height='32' fill='%23ede8df'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141414;
+    --panel:#1f1e1c;
+    --panel-2:#242320;
+    --chalk:#ede8df;
+    --chalk-dim:#c9c3b6;
+    --rust:#c1440e;
+    --rust-light:#e0602a;
+    --hazard:#e8b923;
+    --steel:#8a857c;
+    --line: rgba(237,232,223,0.12);
+    --radius: 2px;
+    --maxw: 1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  :root{ --header-h: 73px; }
+  [id]{ scroll-margin-top: var(--header-h); }
+  .visually-hidden{
+    position:absolute !important; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+  .skip-link{
+    position:absolute; left:12px; top:-60px;
+    background:var(--hazard); color:var(--ink);
+    font-family:'JetBrains Mono', monospace; font-weight:700; font-size:13px;
+    padding:10px 16px; border-radius:var(--radius); z-index:200;
+    transition:top 0.15s ease;
+  }
+  .skip-link:focus{ top:12px; }
+  body{
+    background:var(--ink);
+    color:var(--chalk);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  h1,h2,h3,.display{
+    font-family:'Anton', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    line-height:0.95;
+    font-weight:400;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--hazard);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:18px;height:2px;
+    background:var(--hazard);
+    display:inline-block;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    font-size:14px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:16px 28px;
+    border-radius:var(--radius);
+    border:2px solid transparent;
+    cursor:pointer;
+    transition:transform 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    min-height:48px;
+  }
+  .btn-primary{ background:var(--rust); color:var(--chalk); }
+  .btn-primary:hover{ background:var(--rust-light); transform:translateY(-2px); }
+  .btn-primary:focus-visible{ outline:3px solid var(--hazard); outline-offset:3px; }
+  .btn-ghost{ border-color:var(--line); color:var(--chalk); }
+  .btn-ghost:hover{ border-color:var(--chalk); }
+  .btn-ghost:focus-visible{ outline:3px solid var(--hazard); outline-offset:3px; }
+  a:focus-visible, button:focus-visible{ outline:3px solid var(--hazard); outline-offset:3px; }
+
+  /* ===== Hazard stripe divider — signature element ===== */
+  .hazard-strip{
+    height:14px;
+    width:100%;
+    background:repeating-linear-gradient(
+      -45deg,
+      var(--hazard) 0 18px,
+      var(--ink) 18px 36px
+    );
+  }
+
+  /* ===== Header ===== */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(20,20,20,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px;
+  }
+  .logo{
+    font-family:'Anton', sans-serif;
+    font-size:24px;
+    letter-spacing:0.03em;
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo span{ color:var(--rust); }
+  .nav-links{
+    display:none;
+    gap:32px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+  }
+  .nav-links a{ padding:6px 0; border-bottom:2px solid transparent; transition:border-color 0.15s ease, color 0.15s ease; }
+  .nav-links a:hover{ border-color:var(--rust); color:var(--rust-light); }
+  .nav-cta{ display:none; }
+  .menu-btn{
+    background:none; border:1px solid var(--line); color:var(--chalk);
+    width:44px; height:44px; border-radius:var(--radius);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+  }
+  .menu-btn span, .menu-btn::before, .menu-btn::after{
+    content:""; display:block; width:20px; height:2px; background:var(--chalk);
+    position:relative; transition:transform 0.2s ease, opacity 0.2s ease;
+  }
+  .menu-btn::before{ transform:translateY(-6px); }
+  .menu-btn span{ }
+  .menu-btn::after{ transform:translateY(4px); }
+  .menu-btn.open::before{ transform:rotate(45deg); }
+  .menu-btn.open span{ opacity:0; }
+  .menu-btn.open::after{ transform:rotate(-45deg) translateY(0); margin-top:-8px; }
+
+  .mobile-menu{
+    max-height:0; overflow:hidden; transition:max-height 0.25s ease;
+    background:var(--panel); border-bottom:1px solid var(--line);
+  }
+  .mobile-menu.open{ max-height:420px; }
+  .mobile-menu ul{ padding:8px 24px 20px; display:flex; flex-direction:column; gap:4px; }
+  .mobile-menu a{
+    font-family:'JetBrains Mono', monospace; text-transform:uppercase; font-size:14px; letter-spacing:0.05em;
+    padding:14px 4px; border-bottom:1px solid var(--line); min-height:44px; display:flex; align-items:center;
+  }
+  .mobile-menu .btn{ margin-top:12px; width:100%; justify-content:center; }
+  .mobile-menu-cta{ padding:0 24px; }
+
+  @media (min-width:900px){
+    .nav-links{ display:flex; }
+    .nav-cta{ display:inline-flex; }
+    .menu-btn{ display:none; }
+    .mobile-menu{ display:none; }
+  }
+
+  /* ===== Real-photo shadow treatment (used across hero / trainers / gallery) ===== */
+  .photo{ position:relative; overflow:hidden; }
+  .photo img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    filter:grayscale(88%) contrast(1.2) brightness(0.72);
+    transform:scale(1.02);
+  }
+  .photo::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(20,20,20,0.15) 0%, rgba(20,20,20,0.55) 65%, rgba(20,20,20,0.9) 100%),
+               linear-gradient(100deg, rgba(193,68,14,0.28), transparent 55%);
+    mix-blend-mode:multiply;
+    pointer-events:none;
+  }
+  .photo::before{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 40%, rgba(20,20,20,0.85) 100%);
+    pointer-events:none;
+    z-index:1;
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    padding:72px 0 56px;
+    overflow:hidden;
+    background:var(--ink);
+  }
+  @media (min-width:640px){ .hero{ padding:96px 0 72px; } }
+  .hero h1{ text-shadow:0 2px 18px rgba(0,0,0,0.55); }
+  .hero-sub{ text-shadow:0 1px 8px rgba(0,0,0,0.4); }
+  .hero-bg{ position:absolute; inset:0; z-index:0; }
+  .hero-bg img{
+    width:100%; height:100%; object-fit:cover;
+    filter:grayscale(80%) contrast(1.25) brightness(0.55);
+  }
+  .hero-bg .bg-overlay{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at top right, rgba(193,68,14,0.35), transparent 55%),
+      linear-gradient(180deg, rgba(20,20,20,0.55) 0%, rgba(20,20,20,0.88) 65%, var(--ink) 100%);
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0; z-index:0;
+    background-image:
+      repeating-linear-gradient(180deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 3px);
+    pointer-events:none;
+  }
+  .hero-inner{ position:relative; z-index:1; display:grid; gap:36px; }
+  .hero h1{
+    font-size:clamp(40px, 12vw, 118px);
+    color:var(--chalk);
+  }
+  .hero h1 em{ font-style:normal; color:var(--rust); }
+  .hero-sub{
+    max-width:520px;
+    color:var(--chalk-dim);
+    font-size:17px;
+  }
+  .hero-cta{ display:flex; flex-wrap:wrap; gap:16px; margin-top:8px; }
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:24px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--steel);
+    margin-top:8px;
+  }
+  .hero-meta strong{ color:var(--chalk); }
+
+  /* ===== Stats ticker (scoreboard) ===== */
+  .ticker{
+    background:var(--panel);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:32px 0;
+  }
+  .ticker-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:24px;
+  }
+  @media (min-width:640px){ .ticker-grid{ grid-template-columns:repeat(4, 1fr); } }
+  .stat{ text-align:center; }
+  .stat-num{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    font-size:clamp(28px, 5vw, 40px);
+    color:var(--hazard);
+  }
+  .stat-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--steel); margin-top:6px;
+  }
+
+  /* ===== Section base ===== */
+  section{ padding:88px 0; }
+  .section-head{ max-width:640px; margin-bottom:48px; }
+  .section-head h2{ font-size:clamp(32px, 5.5vw, 52px); margin-top:14px; }
+  .section-head p{ color:var(--chalk-dim); margin-top:16px; font-size:16px; }
+
+  /* ===== About ===== */
+  .about{ background:var(--ink); }
+  .about-grid{ display:grid; gap:40px; }
+  @media (min-width:900px){ .about-grid{ grid-template-columns:1fr 1fr; align-items:center; } }
+  .about-copy p{ color:var(--chalk-dim); margin-bottom:16px; }
+  .about-copy p:last-child{ margin-bottom:0; }
+  .about-panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:32px;
+    border-radius:var(--radius);
+  }
+  .about-panel ul{ display:grid; gap:18px; }
+  .about-panel li{ display:flex; gap:14px; align-items:flex-start; }
+  .num{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--rust);
+    font-weight:700;
+    font-size:14px;
+    min-width:28px;
+  }
+
+  /* ===== Programs ===== */
+  .programs{ background:var(--panel); }
+  .prog-grid{ display:grid; gap:20px; grid-template-columns:1fr; }
+  @media (min-width:640px){ .prog-grid{ grid-template-columns:1fr 1fr; } }
+  @media (min-width:1024px){ .prog-grid{ grid-template-columns:repeat(4, 1fr); } }
+  .prog-card{
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    padding:28px 24px;
+    border-radius:var(--radius);
+    transition:transform 0.18s ease, border-color 0.18s ease;
+  }
+  .prog-card:hover{ transform:translateY(-6px); border-color:var(--rust); }
+  .prog-tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--hazard);
+  }
+  .prog-card h3{ font-size:24px; margin-top:10px; margin-bottom:10px; }
+  .prog-card p{ color:var(--chalk-dim); font-size:14px; }
+
+  /* ===== Trainers ===== */
+  .trainers{ background:var(--ink); }
+  .trainer-grid{ display:grid; gap:24px; grid-template-columns:1fr; }
+  @media (min-width:640px){ .trainer-grid{ grid-template-columns:1fr 1fr; } }
+  @media (min-width:1024px){ .trainer-grid{ grid-template-columns:repeat(3, 1fr); } }
+  .trainer-card{ border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--panel); transition:transform 0.18s ease, border-color 0.18s ease; }
+  .trainer-card:hover{ transform:translateY(-4px); border-color:var(--rust); }
+  .trainer-photo{
+    aspect-ratio:4/3;
+    display:flex; align-items:flex-end; padding:16px;
+  }
+  .trainer-photo span{
+    position:relative; z-index:2;
+    font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--chalk-dim);
+    background:rgba(20,20,20,0.6); padding:4px 8px; border-radius:var(--radius);
+  }
+  .trainer-body{ padding:20px; }
+  .trainer-body h3{ font-size:20px; margin-bottom:4px; }
+  .trainer-role{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--rust-light); text-transform:uppercase; letter-spacing:0.05em; }
+  .trainer-body p{ color:var(--chalk-dim); font-size:14px; margin-top:12px; }
+
+  /* ===== Pricing ===== */
+  .pricing{ background:var(--panel); }
+  .price-grid{ display:grid; gap:24px; grid-template-columns:1fr; }
+  @media (min-width:768px){ .price-grid{ grid-template-columns:repeat(3, 1fr); } }
+  .price-card{
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:32px 28px;
+    display:flex; flex-direction:column; gap:18px;
+  }
+  .price-card.featured{
+    border-color:var(--rust);
+    background:linear-gradient(180deg, rgba(193,68,14,0.12), var(--panel-2) 40%);
+    position:relative;
+  }
+  .price-card.featured::before{
+    content:"Most Popular";
+    position:absolute; top:-13px; left:28px;
+    background:var(--rust); color:var(--chalk);
+    font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase;
+    padding:5px 12px; border-radius:var(--radius);
+  }
+  .price-card h3{ font-size:22px; }
+  .price-amt{ font-family:'JetBrains Mono', monospace; font-size:36px; font-weight:700; color:var(--hazard); }
+  .price-amt sub{ font-size:13px; color:var(--steel); font-weight:400; }
+  .price-card ul{ display:grid; gap:10px; font-size:14px; color:var(--chalk-dim); }
+  .price-card li::before{ content:"— "; color:var(--rust); }
+  .price-card .btn{ margin-top:auto; justify-content:center; }
+
+  /* ===== Gallery ===== */
+  .gallery{ background:var(--ink); }
+  .gal-grid{ display:grid; gap:12px; grid-template-columns:repeat(2, 1fr); }
+  @media (min-width:640px){ .gal-grid{ grid-template-columns:repeat(4, 1fr); } }
+  .gal-item{
+    aspect-ratio:1/1; border-radius:var(--radius); overflow:hidden;
+    display:flex; align-items:flex-end; padding:12px;
+    transition:transform 0.2s ease;
+  }
+  .gal-item:hover{ transform:scale(1.03); }
+  .gal-item:hover img{ filter:grayscale(60%) contrast(1.2) brightness(0.85); }
+  .gal-item span{
+    position:relative; z-index:2;
+    font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--chalk-dim); text-transform:uppercase; letter-spacing:0.04em;
+  }
+
+  /* ===== Testimonials ===== */
+  .testimonials{ background:var(--panel); }
+  .t-scroll{
+    display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:12px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .t-scroll::-webkit-scrollbar{ height:6px; }
+  .t-scroll::-webkit-scrollbar-thumb{ background:var(--rust); border-radius:4px; }
+  .t-card{
+    scroll-snap-align:start;
+    min-width:280px; max-width:340px; flex:1 0 80%;
+    background:var(--panel-2); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px;
+  }
+  @media (min-width:640px){ .t-card{ flex:1 0 44%; } }
+  @media (min-width:1024px){ .t-card{ flex:1 0 30%; } }
+  .t-quote{ color:var(--chalk-dim); font-size:15px; margin-bottom:18px; }
+  .t-name{ font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--hazard); text-transform:uppercase; letter-spacing:0.04em; }
+
+  /* ===== Location / Contact ===== */
+  .contact{ background:var(--ink); }
+  .contact-grid{ display:grid; gap:40px; }
+  @media (min-width:900px){ .contact-grid{ grid-template-columns:1fr 1fr; } }
+  .contact-heading{ margin-top:14px; font-size:clamp(30px,5vw,44px); }
+  .contact-info-first{ margin-top:28px; }
+  .info-block{ margin-bottom:28px; }
+  .info-block h3{ font-size:16px; font-family:'JetBrains Mono', monospace; text-transform:uppercase; letter-spacing:0.06em; color:var(--hazard); margin-bottom:8px; }
+  .info-block p{ color:var(--chalk-dim); }
+  .map-box{
+    position:relative;
+    aspect-ratio:4/3;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:var(--panel);
+  }
+  .map-box iframe{
+    width:100%; height:100%; border:0; display:block;
+    filter:grayscale(45%) contrast(1.1) brightness(0.85);
+  }
+  .map-badge{
+    position:absolute; top:12px; left:12px; z-index:2;
+    background:rgba(20,20,20,0.85); border:1px solid var(--line);
+    color:var(--chalk-dim);
+    font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.04em; text-transform:uppercase;
+    padding:6px 10px; border-radius:var(--radius);
+  }
+
+  /* WhatsApp CTA */
+  .whatsapp-inline{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'JetBrains Mono', monospace; font-size:13px; letter-spacing:0.04em; text-transform:uppercase;
+    color:var(--chalk-dim); border:1px solid var(--line); border-radius:var(--radius);
+    padding:12px 18px; margin-top:20px; transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .whatsapp-inline:hover{ border-color:#25D366; color:var(--chalk); }
+  .whatsapp-inline svg{ width:18px; height:18px; flex-shrink:0; fill:#25D366; }
+  .whatsapp-float{
+    position:fixed; right:18px; bottom:18px; z-index:90;
+    width:52px; height:52px; border-radius:50%;
+    background:#25D366; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 18px rgba(0,0,0,0.4);
+    transition:transform 0.15s ease;
+  }
+  .whatsapp-float:hover{ transform:scale(1.06); }
+  .whatsapp-float svg{ width:26px; height:26px; fill:var(--ink); }
+  @media (min-width:900px){ .whatsapp-float{ display:none; } }
+
+  form{ display:grid; gap:16px; }
+  .field-row{ display:grid; gap:16px; grid-template-columns:1fr; }
+  @media (min-width:560px){ .field-row{ grid-template-columns:1fr 1fr; } }
+  .field{ display:grid; gap:6px; min-width:0; }
+  label{ font-family:'JetBrains Mono', monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.05em; color:var(--steel); }
+  .optional-tag{ text-transform:none; letter-spacing:0; color:var(--steel); font-weight:400; }
+  input, textarea, select{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    color:var(--chalk); padding:14px 16px; font-family:'Work Sans', sans-serif; font-size:15px;
+    min-height:48px; width:100%;
+  }
+  select{ appearance:none; background-image:linear-gradient(45deg, transparent 50%, var(--steel) 50%), linear-gradient(135deg, var(--steel) 50%, transparent 50%); background-position:calc(100% - 20px) calc(50% - 3px), calc(100% - 15px) calc(50% - 3px); background-size:5px 5px, 5px 5px; background-repeat:no-repeat; }
+  textarea{ min-height:110px; resize:vertical; }
+  input:focus, textarea:focus, select:focus{ outline:2px solid var(--rust); border-color:var(--rust); }
+  input[aria-invalid="true"], textarea[aria-invalid="true"]{ border-color:#e0602a; }
+  .field-error{
+    display:none;
+    font-family:'JetBrains Mono', monospace; font-size:12px; color:#ff8a5c;
+  }
+  .field.has-error .field-error{ display:block; }
+  .field.has-error input, .field.has-error textarea{ border-color:#ff8a5c; }
+
+  .form-status{
+    display:none;
+    align-items:center; gap:10px;
+    font-family:'JetBrains Mono', monospace; font-size:13px;
+    padding:14px 16px; border-radius:var(--radius); border:1px solid var(--line);
+  }
+  .form-status.visible{ display:flex; }
+  .form-status.status-success{ border-color:#3fae5a; color:#8fe2a6; }
+  .form-status.status-error{ border-color:#c1440e; color:#ff9c6f; }
+  .form-status.status-loading{ border-color:var(--steel); color:var(--chalk-dim); }
+
+  .btn[disabled]{ opacity:0.6; cursor:not-allowed; }
+  .btn .spinner{
+    width:14px; height:14px; border-radius:50%;
+    border:2px solid rgba(237,232,223,0.4); border-top-color:var(--chalk);
+    animation:spin 0.7s linear infinite; display:none;
+  }
+  .btn.is-loading .spinner{ display:inline-block; }
+  .btn.is-loading .btn-label{ opacity:0.7; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  .form-note{ font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--steel); margin-top:2px; }
+
+  /* ===== Footer ===== */
+  footer{ background:var(--panel); border-top:1px solid var(--line); padding:56px 0 32px; }
+  .footer-grid{ display:grid; gap:36px; grid-template-columns:1fr; margin-bottom:36px; }
+  @media (min-width:768px){ .footer-grid{ grid-template-columns:2fr 1fr 1fr; } }
+  .footer-brand .logo{ margin-bottom:12px; }
+  .footer-brand p{ color:var(--chalk-dim); max-width:320px; font-size:14px; }
+  .footer-col h4{ font-family:'JetBrains Mono', monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--hazard); margin-bottom:14px; }
+  .footer-col ul{ display:grid; gap:10px; }
+  .footer-col a{ color:var(--chalk-dim); font-size:14px; }
+  .footer-col a:hover{ color:var(--chalk); }
+  .footer-bottom{
+    display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between;
+    border-top:1px solid var(--line); padding-top:24px;
+    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--steel);
+  }
+  .footer-disclaimer{
+    margin-top:18px; font-size:12px; color:var(--steel); max-width:620px; line-height:1.6;
+  }
+
+  /* reveal on scroll */
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<header id="top">
+  <nav class="nav wrap" aria-label="Primary">
+    <a href="#top" class="logo">FORGE<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#trainers">Trainers</a></li>
+      <li><a href="#pricing">Membership</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Visit</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-primary nav-cta">Start Trial</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#trainers">Trainers</a></li>
+      <li><a href="#pricing">Membership</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Visit</a></li>
+    </ul>
+    <div class="mobile-menu-cta"><a href="#contact" class="btn btn-primary">Start Trial</a></div>
+  </div>
+</header>
+
+<div class="hazard-strip" aria-hidden="true"></div>
+
+<main id="main-content">
+
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1541600383005-565c949cf777?auto=format&fit=crop&w=1800&q=70" alt="" loading="eager">
+      <div class="bg-overlay"></div>
+    </div>
+    <div class="wrap hero-inner">
+      <span class="eyebrow">Strength & Conditioning Gym</span>
+      <h1>Built <em>Under</em><br>Pressure</h1>
+      <p class="hero-sub">FORGE is a no-frills strength gym for people who want to get stronger, not entertained. Iron, chalk, and a coach watching your bar path — every session.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Book a Free Session</a>
+        <a href="#programs" class="btn btn-ghost">See Programs</a>
+      </div>
+      <div class="hero-meta">
+        <span>📍 <strong>Sector 12, Model Town</strong></span>
+        <span>🕐 <strong>5 AM – 11 PM Daily</strong></span>
+        <span>🏋️ <strong>500kg+ Iron Floor</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker">
+    <div class="wrap ticker-grid">
+      <div class="stat"><div class="stat-num" data-count="1200">0</div><div class="stat-label">Members Trained</div></div>
+      <div class="stat"><div class="stat-num" data-count="9">0</div><div class="stat-label">Years Open</div></div>
+      <div class="stat"><div class="stat-num" data-count="34">0</div><div class="stat-label">Classes / Week</div></div>
+      <div class="stat"><div class="stat-num" data-count="6800">0</div><div class="stat-label">PRs Broken</div></div>
+    </div>
+  </div>
+
+  <section class="about">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <span class="eyebrow">Why Forge</span>
+        <h2 style="margin-top:14px;">A gym, not a gimmick.</h2>
+        <div class="about-copy" style="margin-top:20px;">
+          <p>No mirrors turned into content sets, no colour-coded juice bar. Forge is built around three things: heavy equipment that doesn't wobble, coaches who correct your form uninvited, and a floor that smells like chalk, not eucalyptus.</p>
+          <p>Whether you're chasing your first pull-up or your fifth powerlifting meet, you train next to people doing the same — not past them on a screen.</p>
+        </div>
+      </div>
+      <div class="about-panel reveal">
+        <ul>
+          <li><span class="num">01</span><span>Certified strength coaches on the floor at all times, not just in classes.</span></li>
+          <li><span class="num">02</span><span>Olympic platforms, competition bars, and a dedicated conditioning bay.</span></li>
+          <li><span class="num">03</span><span>Small class caps — 12 max — so coaching actually happens.</span></li>
+          <li><span class="num">04</span><span>Open 5 AM to 11 PM, because life doesn't run on gym hours.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="programs" id="programs">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Programs</span>
+        <h2>Pick your discipline</h2>
+        <p>Four tracks, one floor. Mix and match as your membership allows.</p>
+      </div>
+      <div class="prog-grid">
+        <div class="prog-card reveal">
+          <span class="prog-tag">Strength</span>
+          <h3>Powerbuilding</h3>
+          <p>Squat, bench, deadlift progressions with accessory work for size. Coached, logged, and tested every 8 weeks.</p>
+        </div>
+        <div class="prog-card reveal">
+          <span class="prog-tag">Conditioning</span>
+          <h3>Metcon Floor</h3>
+          <p>High-output circuits on sleds, rowers, and bikes. Built for engine, not for Instagram.</p>
+        </div>
+        <div class="prog-card reveal">
+          <span class="prog-tag">Combat</span>
+          <h3>Bag & Pad Work</h3>
+          <p>Boxing fundamentals, pad rounds, and heavy-bag conditioning led by a former amateur boxer.</p>
+        </div>
+        <div class="prog-card reveal">
+          <span class="prog-tag">Recovery</span>
+          <h3>Mobility Lab</h3>
+          <p>Joint prep, band work, and breathing drills so the other three programs don't wreck you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trainers" id="trainers">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Coaches</span>
+        <h2>People who'll correct your form</h2>
+        <p>Every coach at Forge competes or has competed. They teach what they still do themselves.</p>
+      </div>
+      <div class="trainer-grid">
+        <div class="trainer-card reveal">
+          <div class="trainer-photo photo">
+            <img src="https://images.unsplash.com/photo-1520948013839-62020f374478?auto=format&fit=crop&w=700&q=70&crop=faces,entropy" alt="Arjun Rathi, head strength coach" loading="lazy">
+            <span>Floor Coach</span>
+          </div>
+          <div class="trainer-body">
+            <h3>Arjun Rathi</h3>
+            <div class="trainer-role">Head Strength Coach</div>
+            <p>National-level powerlifter, 9 years coaching. Runs the Powerbuilding track.</p>
+          </div>
+        </div>
+        <div class="trainer-card reveal">
+          <div class="trainer-photo photo">
+            <img src="https://images.unsplash.com/photo-1541980162-4d2fd81f420d?auto=format&fit=crop&w=700&q=70&crop=faces,entropy" alt="Devesh Nair, conditioning lead" loading="lazy">
+            <span>Floor Coach</span>
+          </div>
+          <div class="trainer-body">
+            <h3>Devesh Nair</h3>
+            <div class="trainer-role">Conditioning Lead</div>
+            <p>Former track athlete. Designs every Metcon Floor session from scratch, weekly.</p>
+          </div>
+        </div>
+        <div class="trainer-card reveal">
+          <div class="trainer-photo photo">
+            <img src="https://images.unsplash.com/photo-1627262899263-839fe9307c00?auto=format&fit=crop&w=700&q=70&crop=faces,entropy" alt="Ishaan Bedi, boxing coach" loading="lazy">
+            <span>Floor Coach</span>
+          </div>
+          <div class="trainer-body">
+            <h3>Ishaan Bedi</h3>
+            <div class="trainer-role">Boxing Coach</div>
+            <p>Ex-amateur boxer, 12 bouts. Teaches footwork before he ever hands you gloves.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing" id="pricing">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Membership</span>
+        <h2>Simple pricing, no lock-in tricks</h2>
+        <p>Cancel anytime with 7 days' notice. No joining fee this month.</p>
+      </div>
+      <div class="price-grid">
+        <div class="price-card reveal">
+          <h3>Floor Access</h3>
+          <div class="price-amt">₹1,999<sub>/mo</sub></div>
+          <ul>
+            <li>Full gym floor access</li>
+            <li>Locker + shower</li>
+            <li>1 free assessment session</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost choose-plan" data-plan="Floor Access">Choose Plan</a>
+        </div>
+        <div class="price-card featured reveal">
+          <h3>Coached</h3>
+          <div class="price-amt">₹3,499<sub>/mo</sub></div>
+          <ul>
+            <li>Everything in Floor Access</li>
+            <li>Unlimited group classes</li>
+            <li>Monthly progress check-in</li>
+            <li>Priority platform booking</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary choose-plan" data-plan="Coached">Choose Plan</a>
+        </div>
+        <div class="price-card reveal">
+          <h3>1-on-1</h3>
+          <div class="price-amt">₹7,999<sub>/mo</sub></div>
+          <ul>
+            <li>Everything in Coached</li>
+            <li>2x personal training / week</li>
+            <li>Custom programming</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost choose-plan" data-plan="1-on-1">Choose Plan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" id="gallery">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Inside Forge</span>
+        <h2>The floor, unfiltered</h2>
+      </div>
+      <div class="gal-grid">
+        <div class="gal-item photo reveal"><img src="https://images.unsplash.com/photo-1649068610862-ed43a08442cf?auto=format&fit=crop&w=500&h=500&q=70&crop=entropy" alt="Iron floor equipment" loading="lazy"><span>Iron Floor</span></div>
+        <div class="gal-item photo reveal"><img src="https://images.unsplash.com/photo-1541600383005-565c949cf777?auto=format&fit=crop&w=500&h=500&q=70&crop=bottom" alt="Lifter on platform" loading="lazy"><span>Platform 3</span></div>
+        <div class="gal-item photo reveal"><img src="https://images.unsplash.com/photo-1627262899263-839fe9307c00?auto=format&fit=crop&w=500&h=500&q=70&crop=top" alt="Boxing gloves and bag room" loading="lazy"><span>Bag Room</span></div>
+        <div class="gal-item photo reveal"><img src="https://images.unsplash.com/photo-1672344048213-76b6e77304bd?auto=format&fit=crop&w=500&h=500&q=70&crop=entropy" alt="Dumbbell conditioning bay" loading="lazy"><span>Metcon Bay</span></div>
+        <div class="gal-item photo reveal"><img src="https://images.unsplash.com/photo-1520948013839-62020f374478?auto=format&fit=crop&w=500&h=500&q=70&crop=top" alt="Barbell rack wall" loading="lazy"><span>Rack Wall</span></div>
+        <div class="gal-item photo reveal"><img src="https://images.unsplash.com/photo-1517964603305-11c0f6f66012?auto=format&fit=crop&w=500&h=500&q=70&crop=entropy" alt="Chalk station" loading="lazy"><span>Chalk Station</span></div>
+        <div class="gal-item photo reveal"><img src="https://images.unsplash.com/photo-1649068610862-ed43a08442cf?auto=format&fit=crop&w=500&h=500&q=70&crop=left" alt="Mobility lab area" loading="lazy"><span>Mobility Lab</span></div>
+        <div class="gal-item photo reveal"><img src="https://images.unsplash.com/photo-1672344048213-76b6e77304bd?auto=format&fit=crop&w=500&h=500&q=70&crop=right" alt="Locker room" loading="lazy"><span>Locker Room</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Members</span>
+        <h2>What the floor says</h2>
+      </div>
+      <div class="t-scroll">
+        <div class="t-card reveal">
+          <p class="t-quote">"First gym where a coach actually stopped my set to fix my setup. Added 20kg to my deadlift in three months."</p>
+          <div class="t-name">— Priya S., Member since 2023</div>
+        </div>
+        <div class="t-card reveal">
+          <p class="t-quote">"No music videos, no juice bar upsell. Just iron and people who show up at 6 AM like I do."</p>
+          <div class="t-name">— Rohit M., Member since 2021</div>
+        </div>
+        <div class="t-card reveal">
+          <p class="t-quote">"The bag room alone is worth it. Ishaan doesn't let you skip footwork, ever."</p>
+          <div class="t-name">— Karan D., Member since 2024</div>
+        </div>
+        <div class="t-card reveal">
+          <p class="t-quote">"Small class sizes mean the coach actually knows your name and your last PR."</p>
+          <div class="t-name">— Ananya V., Member since 2022</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <span class="eyebrow">Visit</span>
+        <h2 class="contact-heading">Come lift with us</h2>
+        <div class="info-block contact-info-first">
+          <h3>Address</h3>
+          <p>Forge Strength & Conditioning<br>Ground Floor, Plot 22, Sector 12<br>Model Town, Delhi</p>
+          <p class="form-note">Demo address for portfolio purposes only.</p>
+        </div>
+        <div class="info-block">
+          <h3>Hours</h3>
+          <p>Mon – Sat: 5:00 AM – 11:00 PM<br>Sunday: 7:00 AM – 2:00 PM</p>
+        </div>
+        <div class="info-block">
+          <h3>Contact</h3>
+          <p>+91 98765 43210<br>hello@forgegym.example</p>
+          <a class="whatsapp-inline" href="https://wa.me/919876543210?text=Hi%20FORGE%2C%20I%27d%20like%20to%20know%20more%20about%20membership" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.3.2-.6.1a7.7 7.7 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5.3-.4a.6.6 0 0 0 0-.5c-.1-.1-.7-1.6-.9-2.2s-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 6 6 0 0 0 1.3 3.1 13.6 13.6 0 0 0 5.2 4.6c.7.3 1.3.5 1.7.6a4.1 4.1 0 0 0 1.9.1 3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 20.2 12 8.2 8.2 0 0 1 12 20.2z"/></svg>
+            <span>Chat on WhatsApp</span>
+          </a>
+        </div>
+        <div class="map-box">
+          <span class="map-badge">Demo map — general area only</span>
+          <iframe
+            title="Map showing the general Model Town, Delhi area"
+            src="https://maps.google.com/maps?q=Model%20Town%2C%20Delhi&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+
+      <form id="contactForm" class="reveal" novalidate>
+        <div class="field-row">
+          <div class="field" data-field="name">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your full name" autocomplete="name" required aria-describedby="name-error">
+            <span class="field-error" id="name-error" role="alert"></span>
+          </div>
+          <div class="field" data-field="phone">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" placeholder="98765 43210" autocomplete="tel" inputmode="numeric" required aria-describedby="phone-error">
+            <span class="field-error" id="phone-error" role="alert"></span>
+            <span class="form-note">10-digit Indian mobile number, with or without +91.</span>
+          </div>
+        </div>
+        <div class="field" data-field="plan">
+          <label for="plan">Membership plan <span class="optional-tag">(optional)</span></label>
+          <select id="plan" name="plan">
+            <option value="">No preference yet</option>
+            <option value="Floor Access">Floor Access — ₹1,999/mo</option>
+            <option value="Coached">Coached — ₹3,499/mo</option>
+            <option value="1-on-1">1-on-1 — ₹7,999/mo</option>
+          </select>
+        </div>
+        <div class="field" data-field="goal">
+          <label for="goal">Training goal <span class="optional-tag">(optional)</span></label>
+          <input id="goal" name="goal" type="text" placeholder="e.g. strength, fat loss, boxing">
+        </div>
+        <div class="field" data-field="msg">
+          <label for="msg">Message <span class="optional-tag">(optional)</span></label>
+          <textarea id="msg" name="message" placeholder="Preferred timing, questions, anything else"></textarea>
+        </div>
+
+        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+
+        <button type="submit" class="btn btn-primary" id="submitBtn">
+          <span class="spinner" aria-hidden="true"></span>
+          <span class="btn-label">Request Free Trial</span>
+        </button>
+        <p class="form-note">This is a portfolio demo — form submissions aren't sent anywhere yet. The code is structured so a real endpoint can be added in one place (see <code>FORGE_FORM_ENDPOINT</code> in the script).</p>
+      </form>
+    </div>
+  </section>
+
+  <a href="https://wa.me/919876543210?text=Hi%20FORGE%2C%20I%27d%20like%20to%20know%20more%20about%20membership" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.3.2-.6.1a7.7 7.7 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5.3-.4a.6.6 0 0 0 0-.5c-.1-.1-.7-1.6-.9-2.2s-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 6 6 0 0 0 1.3 3.1 13.6 13.6 0 0 0 5.2 4.6c.7.3 1.3.5 1.7.6a4.1 4.1 0 0 0 1.9.1 3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 20.2 12 8.2 8.2 0 0 1 12 20.2z"/></svg>
+  </a>
+
+</main>
+
+<div class="hazard-strip"></div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo">FORGE<span>.</span></a>
+        <p>A strength and conditioning gym in Model Town, Delhi. Iron floor, real coaching, no gimmicks.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#trainers">Coaches</a></li>
+          <li><a href="#pricing">Membership</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow <span class="optional-tag">(demo links)</span></h4>
+        <ul>
+          <li><a href="https://instagram.com/yourhandle" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://youtube.com/@yourchannel" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          <li><a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Forge Strength & Conditioning</span>
+      <span>Model Town, Delhi</span>
+    </div>
+    <p class="footer-disclaimer">FORGE is a fictional brand created as a web design &amp; development portfolio project. Address, pricing, trainers, and testimonials shown here are demo content, not a real business.</p>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    menuBtn.classList.toggle('open', isOpen);
+    menuBtn.setAttribute('aria-expanded', isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    menuBtn.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+      mobileMenu.classList.remove('open');
+      menuBtn.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.focus();
+    }
+  });
+
+  // "Choose Plan" buttons: scroll to the contact form and pre-select the plan
+  const planSelect = document.getElementById('plan');
+  document.querySelectorAll('.choose-plan').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (planSelect) {
+        planSelect.value = btn.dataset.plan || '';
+        planSelect.dispatchEvent(new Event('change'));
+      }
+    });
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // ===== Contact form: validation + submission =====
+  // To go live, set this to a real endpoint (e.g. Formspree, a serverless function, etc.)
+  // and the fetch() call below will send the data there. Left null in this demo.
+  const FORGE_FORM_ENDPOINT = null; // e.g. 'https://formspree.io/f/your-id'
+
+  const form = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formStatus = document.getElementById('formStatus');
+  let isSubmitting = false;
+
+  function setFieldError(fieldName, message) {
+    const wrap = form.querySelector(`[data-field="${fieldName}"]`);
+    if (!wrap) return;
+    const input = wrap.querySelector('input, textarea');
+    const errorEl = wrap.querySelector('.field-error');
+    if (message) {
+      wrap.classList.add('has-error');
+      if (input) input.setAttribute('aria-invalid', 'true');
+      if (errorEl) errorEl.textContent = message;
+    } else {
+      wrap.classList.remove('has-error');
+      if (input) input.removeAttribute('aria-invalid');
+      if (errorEl) errorEl.textContent = '';
+    }
+  }
+
+  function validateName(value) {
+    if (!value.trim()) return 'Please enter your name.';
+    if (value.trim().length < 2) return 'Name looks too short.';
+    return '';
+  }
+
+  function validateIndianPhone(value) {
+    const cleaned = value.replace(/[\s-]/g, '');
+    const regex = /^(?:\+91|91|0)?[6-9]\d{9}$/;
+    if (!cleaned) return 'Please enter your phone number.';
+    if (!regex.test(cleaned)) return 'Enter a valid 10-digit Indian mobile number.';
+    return '';
+  }
+
+  function validateForm() {
+    const nameVal = form.name.value;
+    const phoneVal = form.phone.value;
+    const nameErr = validateName(nameVal);
+    const phoneErr = validateIndianPhone(phoneVal);
+    setFieldError('name', nameErr);
+    setFieldError('phone', phoneErr);
+    return !nameErr && !phoneErr;
+  }
+
+  // Clear a field's error as the person fixes it
+  ['name', 'phone'].forEach((fieldName) => {
+    const input = form.elements[fieldName];
+    if (!input) return;
+    input.addEventListener('input', () => {
+      const wrap = form.querySelector(`[data-field="${fieldName}"]`);
+      if (wrap && wrap.classList.contains('has-error')) {
+        const err = fieldName === 'phone' ? validateIndianPhone(input.value) : validateName(input.value);
+        setFieldError(fieldName, err);
+      }
+    });
+  });
+
+  function showStatus(type, message) {
+    formStatus.className = 'form-status visible status-' + type;
+    formStatus.textContent = message;
+  }
+
+  function hideStatus() {
+    formStatus.className = 'form-status';
+    formStatus.textContent = '';
+  }
+
+  function setLoading(loading) {
+    submitBtn.classList.toggle('is-loading', loading);
+    submitBtn.disabled = loading;
+    submitBtn.querySelector('.btn-label').textContent = loading ? 'Sending…' : 'Request Free Trial';
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+
+    hideStatus();
+    const isValid = validateForm();
+    if (!isValid) {
+      showStatus('error', 'Please fix the highlighted fields and try again.');
+      const firstError = form.querySelector('.has-error input, .has-error textarea');
+      if (firstError) firstError.focus();
+      return;
+    }
+
+    isSubmitting = true;
+    setLoading(true);
+
+    const payload = {
+      name: form.name.value.trim(),
+      phone: form.phone.value.trim(),
+      plan: form.plan.value,
+      goal: form.goal.value.trim(),
+      message: form.message.value.trim()
+    };
+
+    try {
+      if (FORGE_FORM_ENDPOINT) {
+        const res = await fetch(FORGE_FORM_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) throw new Error('Request failed');
+      } else {
+        // Demo mode: no backend configured yet. Simulate a short delay so the
+        // loading/success states are visible, but nothing is actually sent.
+        await new Promise((resolve) => setTimeout(resolve, 900));
+      }
+
+      showStatus('success', 'Thanks — this is a portfolio demo, so nothing was actually sent, but a real submission would be received here.');
+      form.reset();
+      ['name', 'phone'].forEach((f) => setFieldError(f, ''));
+    } catch (err) {
+      showStatus('error', 'Something went wrong sending this. Please try again, or reach out on WhatsApp instead.');
+    } finally {
+      isSubmitting = false;
+      setLoading(false);
+    }
+  });
+
+  // Stat counters
+  const stats = document.querySelectorAll('.stat-num');
+  const statIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        const duration = 1200;
+        const start = performance.now();
+        function tick(now){
+          const progress = Math.min((now - start) / duration, 1);
+          el.textContent = Math.floor(progress * target).toLocaleString();
+          if (progress < 1) requestAnimationFrame(tick);
+          else el.textContent = target.toLocaleString();
+        }
+        requestAnimationFrame(tick);
+        statIO.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  stats.forEach(el => statIO.observe(el));
+</script>
+
+</body>
+</html>
